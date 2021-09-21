@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import {MediaCard} from '@shopify/polaris';
 import '@shopify/polaris/dist/styles.css'
-import heartIcon from './heart.svg'
+
  const ImageCard = (({props}) => {
    const [isFavorite, setFavorite] = useState([])
    const photos = props.map(photo => {
-    console.log(isFavorite)
+
      const handleFavorite = () => {
        if(isFavorite.includes(photo)) {
         return 'Dislike'

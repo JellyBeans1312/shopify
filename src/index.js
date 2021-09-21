@@ -3,11 +3,17 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import enTranslations from '@shopify/polaris/locales/en.json';
+import {AppProvider, Page} from '@shopify/polaris';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <AppProvider i18n={enTranslations}>
+      <Page title={'Spacetagram'}>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    </Page>
+  </AppProvider>,
   document.getElementById('root')
 );
 

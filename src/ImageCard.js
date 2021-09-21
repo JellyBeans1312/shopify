@@ -1,17 +1,36 @@
+import React, {useState} from 'react';
 import {MediaCard} from '@shopify/polaris';
 import '@shopify/polaris/dist/styles.css'
-import heartIcon from './hearticon.png'
+import heartIcon from './heart.svg'
  const ImageCard = (({props}) => {
+   const [isFavorite, setFavorite] = useState([])
    const photos = props.map(photo => {
+    console.log(isFavorite)
+     const handleFavorite = () => {
+       if(isFavorite.includes(photo)) {
+        return 'Dislike'
+      }
+      return 'Like'
+     }
     return (
       <MediaCard
         title={photo.title}
+        date={photo.date}
         description={photo.explanation}
+        size="small"
         primaryAction={{
-          content: heartIcon,
-          onAction: (() => {})
+          content: handleFavorite(photo.name),
+          onAction: (() => {
+            setFavorite([...isFavorite, photo])
+            const url = photo.url
+            if(handleFavorite() === 'Dislike') {
+              setFavorite(isFavorite.filter(item => item.url !== url))
+            }
+          })
         }}
-        size='small'
+        secondaryAction={{
+          content: photo.date
+        }}
       >
         <img
           alt={photo.explanation}
@@ -23,7 +42,7 @@ import heartIcon from './hearticon.png'
           }}
           src={photo.thumbnail_url || photo.url}
         />
-    
+
       </MediaCard>
       )
    })

@@ -2,6 +2,8 @@ import logo from './logo.svg';
 import './App.css';
 import { useState, useEffect } from 'react';
 import ImageCard from './ImageCard'
+import loadingGif from './space-loading.gif'
+import {Button} from '@shopify/polaris'
 
 
 function App() {
@@ -23,9 +25,12 @@ function App() {
     })
     .catch(error => console.log(error))
   }, [page])
+
   return (
     <>
-    <ImageCard props={nasaPictures} />
+      {isLoading && <img src={loadingGif} className='loader' alt="loading"/>}
+      <ImageCard props={nasaPictures} />
+      <Button onClick={() => loadMoreImages()}> Load More Images</Button>
     </>
   )
 }
